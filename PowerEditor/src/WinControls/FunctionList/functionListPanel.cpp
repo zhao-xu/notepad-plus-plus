@@ -561,6 +561,10 @@ void FunctionListPanel::notified(LPNMHDR notification)
 			}
 			break;
 
+			case NM_RETURN:
+				SetWindowLongPtr(_hSelf, DWLP_MSGRESULT, 1); // remove beep
+			break;
+
 			case TVN_KEYDOWN:
 			{
 				LPNMTVKEYDOWN ptvkd = (LPNMTVKEYDOWN)notification;
@@ -573,6 +577,16 @@ void FunctionListPanel::notified(LPNMHDR notification)
 						treeView.toggleExpandCollapse(hItem);
 						break;
 					}
+					PostMessage(_hParent, WM_COMMAND, SCEN_SETFOCUS << 16, reinterpret_cast<LPARAM>((*_ppEditView)->getHSelf()));
+				}
+				else if (ptvkd->wVKey == VK_TAB)
+				{
+					::SetFocus(_hSearchEdit);
+					SetWindowLongPtr(_hSelf, DWLP_MSGRESULT, 1); // remove beep
+				}
+				else if (ptvkd->wVKey == VK_ESCAPE)
+				{
+					SetWindowLongPtr(_hSelf, DWLP_MSGRESULT, 1); // remove beep
 					PostMessage(_hParent, WM_COMMAND, SCEN_SETFOCUS << 16, reinterpret_cast<LPARAM>((*_ppEditView)->getHSelf()));
 				}
 			}
@@ -678,6 +692,28 @@ static LRESULT CALLBACK funclstToolbarProc(HWND hwnd, UINT message, WPARAM wPara
 		}
 	}
 	return oldFunclstToolbarProc(hwnd, message, wParam, lParam);
+}
+
+static WNDPROC oldFunclstSearchEditProc = NULL;
+static LRESULT CALLBACK funclstSearchEditProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+		case WM_CHAR:
+		{
+			if (wParam == VK_ESCAPE)
+			{
+				::SendMessage(hwnd, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(TEXT("")));
+				return FALSE;
+			}
+			else if (wParam == VK_TAB)
+			{
+				::SendMessage(GetParent(hwnd), WM_COMMAND, VK_TAB, 1);
+				return FALSE;
+			}
+		}
+	}
+	return oldFunclstSearchEditProc(hwnd, message, wParam, lParam);
 }
 
 bool FunctionListPanel::shouldSort()
@@ -787,6 +823,8 @@ INT_PTR CALLBACK FunctionListPanel::run_dlgProc(UINT message, WPARAM wParam, LPA
                                    2, 2, editWidth, editHeight,
                                    _hToolbarMenu, reinterpret_cast<HMENU>(IDC_SEARCHFIELD_FUNCLIST), _hInst, 0 );
 
+			oldFunclstSearchEditProc = reinterpret_cast<WNDPROC>(::SetWindowLongPtr(_hSearchEdit, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(funclstSearchEditProc)));
+
 			HFONT hf = (HFONT)::GetStockObject(DEFAULT_GUI_FONT);
 			if (hf)
 				::SendMessage(_hSearchEdit, WM_SETFONT, reinterpret_cast<WPARAM>(hf), MAKELPARAM(TRUE, 0));
@@ -818,6 +856,14 @@ INT_PTR CALLBACK FunctionListPanel::run_dlgProc(UINT message, WPARAM wParam, LPA
 						return TRUE;
 					}
 				}
+			}
+			else if (wParam == VK_TAB)
+			{
+				if (_treeViewSearchResult.isVisible())
+					::SetFocus(_treeViewSearchResult.getHSelf());
+				else
+					::SetFocus(_treeView.getHSelf());
+				return TRUE;
 			}
 
 			switch (LOWORD(wParam))

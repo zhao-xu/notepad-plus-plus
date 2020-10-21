@@ -32,35 +32,36 @@
 
 #define    IDM_FILE    (IDM + 1000)
 // IMPORTANT: If list below is modified, you have to change the value of IDM_FILEMENU_LASTONE and IDM_FILEMENU_EXISTCMDPOSITION
-    #define    IDM_FILE_NEW                     (IDM_FILE + 1)
-    #define    IDM_FILE_OPEN                    (IDM_FILE + 2)
-    #define    IDM_FILE_CLOSE                   (IDM_FILE + 3)
-    #define    IDM_FILE_CLOSEALL                (IDM_FILE + 4)
-    #define    IDM_FILE_CLOSEALL_BUT_CURRENT    (IDM_FILE + 5)
-    #define    IDM_FILE_SAVE                    (IDM_FILE + 6) 
-    #define    IDM_FILE_SAVEALL                 (IDM_FILE + 7) 
-    #define    IDM_FILE_SAVEAS                  (IDM_FILE + 8)
-    #define    IDM_FILE_CLOSEALL_TOLEFT         (IDM_FILE + 9)
-    #define    IDM_FILE_PRINT                   (IDM_FILE + 10)
-    #define    IDM_FILE_PRINTNOW                1001
-    #define    IDM_FILE_EXIT                    (IDM_FILE + 11)
-    #define    IDM_FILE_LOADSESSION             (IDM_FILE + 12)
-    #define    IDM_FILE_SAVESESSION             (IDM_FILE + 13)
-    #define    IDM_FILE_RELOAD                  (IDM_FILE + 14)
-    #define    IDM_FILE_SAVECOPYAS              (IDM_FILE + 15)
-    #define    IDM_FILE_DELETE                  (IDM_FILE + 16)
-    #define    IDM_FILE_RENAME                  (IDM_FILE + 17)
-    #define    IDM_FILE_CLOSEALL_TORIGHT        (IDM_FILE + 18)
-    #define    IDM_FILE_OPEN_FOLDER             (IDM_FILE + 19)
-    #define    IDM_FILE_OPEN_CMD                (IDM_FILE + 20)
-	#define    IDM_FILE_RESTORELASTCLOSEDFILE   (IDM_FILE + 21)
-	#define    IDM_FILE_OPENFOLDERASWORSPACE    (IDM_FILE + 22)
-    #define    IDM_FILE_OPEN_DEFAULT_VIEWER     (IDM_FILE + 23)
-	#define    IDM_FILE_CLOSEALL_UNCHANGED      (IDM_FILE + 24)
+    #define    IDM_FILE_NEW                              (IDM_FILE + 1)
+    #define    IDM_FILE_OPEN                             (IDM_FILE + 2)
+    #define    IDM_FILE_CLOSE                            (IDM_FILE + 3)
+    #define    IDM_FILE_CLOSEALL                         (IDM_FILE + 4)
+    #define    IDM_FILE_CLOSEALL_BUT_CURRENT             (IDM_FILE + 5)
+    #define    IDM_FILE_SAVE                             (IDM_FILE + 6) 
+    #define    IDM_FILE_SAVEALL                          (IDM_FILE + 7) 
+    #define    IDM_FILE_SAVEAS                           (IDM_FILE + 8)
+    #define    IDM_FILE_CLOSEALL_TOLEFT                  (IDM_FILE + 9)
+    #define    IDM_FILE_PRINT                            (IDM_FILE + 10)
+    #define    IDM_FILE_PRINTNOW                         1001
+    #define    IDM_FILE_EXIT                             (IDM_FILE + 11)
+    #define    IDM_FILE_LOADSESSION                      (IDM_FILE + 12)
+    #define    IDM_FILE_SAVESESSION                      (IDM_FILE + 13)
+    #define    IDM_FILE_RELOAD                           (IDM_FILE + 14)
+    #define    IDM_FILE_SAVECOPYAS                       (IDM_FILE + 15)
+    #define    IDM_FILE_DELETE                           (IDM_FILE + 16)
+    #define    IDM_FILE_RENAME                           (IDM_FILE + 17)
+    #define    IDM_FILE_CLOSEALL_TORIGHT                 (IDM_FILE + 18)
+    #define    IDM_FILE_OPEN_FOLDER                      (IDM_FILE + 19)
+    #define    IDM_FILE_OPEN_CMD                         (IDM_FILE + 20)
+    #define    IDM_FILE_RESTORELASTCLOSEDFILE            (IDM_FILE + 21)
+    #define    IDM_FILE_OPENFOLDERASWORSPACE             (IDM_FILE + 22)
+    #define    IDM_FILE_OPEN_DEFAULT_VIEWER              (IDM_FILE + 23)
+    #define    IDM_FILE_CLOSEALL_UNCHANGED               (IDM_FILE + 24)
+    #define    IDM_FILE_CONTAININGFOLDERASWORKSPACE      (IDM_FILE + 25)
 // IMPORTANT: If list above is modified, you have to change the following values:
  
 // To be updated if new menu item(s) is (are) added in menu "File"
-    #define    IDM_FILEMENU_LASTONE             IDM_FILE_CLOSEALL_UNCHANGED
+    #define    IDM_FILEMENU_LASTONE             IDM_FILE_CONTAININGFOLDERASWORKSPACE
 
 // 0 based position of command "Exit" including the bars in the file menu
 // and without counting "Recent files history" items
@@ -131,6 +132,8 @@
 	#define    IDM_EDIT_SORTLINES_DECIMALDOT_ASCENDING		(IDM_EDIT + 65)
 	#define    IDM_EDIT_SORTLINES_DECIMALDOT_DESCENDING		(IDM_EDIT + 66)
 	#define    IDM_EDIT_SORTLINES_RANDOMLY          (IDM_EDIT + 78)
+	#define    IDM_EDIT_SORTLINES_LEXICO_CASE_INSENS_ASCENDING	(IDM_EDIT + 80)
+	#define    IDM_EDIT_SORTLINES_LEXICO_CASE_INSENS_DESCENDING	(IDM_EDIT + 81)
 
 	#define    IDM_EDIT_OPENASFILE                   (IDM_EDIT + 73)
 	#define    IDM_EDIT_OPENINFOLDER                 (IDM_EDIT + 74)
@@ -248,7 +251,15 @@
 	#define    IDM_SEARCH_FINDCHARINRANGE      (IDM_SEARCH + 52)
 	#define    IDM_SEARCH_SELECTMATCHINGBRACES (IDM_SEARCH + 53)
 	#define    IDM_SEARCH_MARK                 (IDM_SEARCH + 54)
-	
+
+    #define    IDM_SEARCH_STYLE1TOCLIP         (IDM_SEARCH + 55)
+    #define    IDM_SEARCH_STYLE2TOCLIP         (IDM_SEARCH + 56)
+    #define    IDM_SEARCH_STYLE3TOCLIP         (IDM_SEARCH + 57)
+    #define    IDM_SEARCH_STYLE4TOCLIP         (IDM_SEARCH + 58)
+    #define    IDM_SEARCH_STYLE5TOCLIP         (IDM_SEARCH + 59)
+    #define    IDM_SEARCH_ALLSTYLESTOCLIP      (IDM_SEARCH + 60)
+    #define    IDM_SEARCH_MARKEDTOCLIP         (IDM_SEARCH + 61)
+
 #define    IDM_MISC    (IDM + 3500)
 	#define    IDM_FILESWITCHER_FILESCLOSE            (IDM_MISC + 1)
 	#define    IDM_FILESWITCHER_FILESCLOSEOTHERS      (IDM_MISC + 2)
@@ -542,7 +553,7 @@
     //#define    IDM_PLUGINSHOME      (IDM_ABOUT  + 5)
     #define    IDM_UPDATE_NPP       (IDM_ABOUT  + 6)
     #define    IDM_WIKIFAQ          (IDM_ABOUT  + 7)
-    #define    IDM_HELP             (IDM_ABOUT  + 8)
+    //#define    IDM_HELP             (IDM_ABOUT  + 8)
 	#define    IDM_CONFUPDATERPROXY (IDM_ABOUT  + 9)
 	#define    IDM_CMDLINEARGUMENTS (IDM_ABOUT  + 10)
 	#define    IDM_ONLINESUPPORT    (IDM_ABOUT  + 11)
